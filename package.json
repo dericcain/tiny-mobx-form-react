@@ -79,8 +79,8 @@
   },
   "size-limit": [
     {
-      "path": "dist/tiny-mobx-form.esm.js",
-      "limit": "2.5kb"
+      "path": "dist/tiny-mobx-form-react.esm.js",
+      "limit": "1kb"
     }
   ]
 }
