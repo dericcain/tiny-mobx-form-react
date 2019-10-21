@@ -11,8 +11,8 @@ export interface FormProps {
 
 export const Form: React.FC<FormProps> = ({
   fields,
-  initialValues,
-  options,
+  initialValues = {},
+  options = {},
   children,
 }) => {
   const form = new FormModel(fields, initialValues, options);

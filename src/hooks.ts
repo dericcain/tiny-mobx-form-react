@@ -9,13 +9,13 @@ export function useForm(): IForm {
 
 export function useField(fieldName: string): IField {
   const { form } = useContext(FormContext);
-  if (!(fieldName in form)) {
+  if (!(fieldName in form.fields)) {
     throw Error(`There is no field named ${fieldName}`);
   }
   return form.fields[fieldName];
 }
 
-export function useFormErrors(): string[] {
+export function useFormErrors(): [string[], () => void] {
   const { form } = useContext(FormContext);
-  return form.errors;
+  return [form.errors, form.showErrors];
 }
