@@ -14,8 +14,3 @@ export function useField(fieldName: string): IField {
   }
   return form.fields[fieldName];
 }
-
-export function useFormErrors(): [string[], () => void] {
-  const { form } = useContext(FormContext);
-  return [form.errors, form.showErrors];
-}

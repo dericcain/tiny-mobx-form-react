@@ -1,34 +1,35 @@
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { useEffect } from 'react';
-import { Form, Field, useForm, useField, useFormErrors } from '../src';
+import React from 'react';
+import { Form, Field, useForm, useField } from '../src';
 import { IFormSchema } from 'tiny-mobx-form';
 
 describe('React Bindings', () => {
-  const renderForm = (fields: IFormSchema[], el: React.ReactNode | null = null) => render(
-    <Form fields={fields}>
-      <Field name="name">
-        {({ input, label, errors, hasErrors }) => (
-          <div>
-            <label>{label}</label>
-            <input {...input} data-testid="name" />
-            <span data-testid="name-errors">{hasErrors && errors.join(' ')}</span>
-          </div>
-        )}
-      </Field>
-      <Field name="email">
-        {({ input, label, errors, hasErrors }) => (
-          <div>
-            <label>{label}</label>
-            <input {...input} data-testid="email" />
-            <span data-testid="email-errors">{hasErrors && errors.join(' ')}</span>
-          </div>
-        )}
-      </Field>
-      {el}
-    </Form>
-  );
+  const renderForm = (fields: IFormSchema[], el: React.ReactNode | null = null) =>
+    render(
+      <Form fields={fields}>
+        <Field name="name">
+          {({ input, label, errors, hasErrors }) => (
+            <div>
+              <label>{label}</label>
+              <input {...input} data-testid="name" />
+              <span data-testid="name-errors">{hasErrors && errors.join(' ')}</span>
+            </div>
+          )}
+        </Field>
+        <Field name="email">
+          {({ input, label, errors, hasErrors }) => (
+            <div>
+              <label>{label}</label>
+              <input {...input} data-testid="email" />
+              <span data-testid="email-errors">{hasErrors && errors.join(' ')}</span>
+            </div>
+          )}
+        </Field>
+        {el}
+      </Form>,
+    );
 
   describe('Form', () => {
     const schema: IFormSchema[] = [
@@ -37,15 +38,15 @@ describe('React Bindings', () => {
         label: 'name',
         placeholder: 'name',
         initialValue: '',
-        validation: 'required|letters'
+        validation: 'required|letters',
       },
       {
         name: 'email',
         label: 'email',
         placeholder: 'email',
         initialValue: '',
-        validation: 'required|email'
-      }
+        validation: 'required|email',
+      },
     ];
 
     it('should render a form and update field values', () => {
@@ -59,7 +60,6 @@ describe('React Bindings', () => {
       expect(name).toHaveAttribute('name', 'name');
       expect(name).toHaveAttribute('value', '');
       expect(email).toHaveAttribute('value', '');
-
 
       const typedName = 'jon';
       const typedEmail = 'jon@email.com';
@@ -86,21 +86,21 @@ describe('React Bindings', () => {
         label: 'name',
         placeholder: 'name',
         initialValue: '',
-        validation: 'required'
+        validation: 'required',
       },
       {
         name: 'email',
         label: 'email',
         placeholder: 'email',
         initialValue: '',
-        validation: 'required'
-      }
+        validation: 'required',
+      },
     ];
 
     it('should return the form', () => {
       function TestForm() {
         const form = useForm();
-        return <div data-testid={form.fields.name.name}>here</div>
+        return <div data-testid={form.fields.name.name}>here</div>;
       }
       const { getByText } = renderForm(schema, <TestForm />);
       getByText(/here/i);
@@ -109,25 +109,10 @@ describe('React Bindings', () => {
     it('should return the field', () => {
       function TestForm() {
         const field = useField('name');
-        return <div data-testid={field.name}>here</div>
+        return <div data-testid={field.name}>here</div>;
       }
       const { getByText } = renderForm(schema, <TestForm />);
       getByText(/here/i);
-    });
-
-    it.skip('should validate the form and return errors', () => {
-      function TestForm() {
-        const form = useForm();
-        console.log(form);
-        const [errors, validate] = useFormErrors();
-        useEffect(() => {
-          validate();
-        }, []);
-        return <div data-testid="errors">{errors.join(' ')}</div>
-      }
-      const { getByTestId } = renderForm(schema, <TestForm />);
-      const errors = getByTestId('errors');
-      expect(errors).toHaveTextContent(/required/i);
     });
   });
 });
