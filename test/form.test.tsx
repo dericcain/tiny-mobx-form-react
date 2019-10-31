@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { Form, Field, useForm, useField } from '../src';
+import { Form, Field, useForm, useField, ErrorField } from '../src';
 import { IFormSchema } from 'tiny-mobx-form';
 
 describe('React Bindings', () => {
@@ -10,20 +10,20 @@ describe('React Bindings', () => {
     render(
       <Form fields={fields}>
         <Field name="name">
-          {({ input, label, errors, hasErrors }) => (
+          {({ input, label }) => (
             <div>
               <label>{label}</label>
               <input {...input} data-testid="name" />
-              <span data-testid="name-errors">{hasErrors && errors.join(' ')}</span>
+              <ErrorField name="name" data-testid="name-errors" />
             </div>
           )}
         </Field>
         <Field name="email">
-          {({ input, label, errors, hasErrors }) => (
+          {({ input, label }) => (
             <div>
               <label>{label}</label>
               <input {...input} data-testid="email" />
-              <span data-testid="email-errors">{hasErrors && errors.join(' ')}</span>
+              <ErrorField name="email" data-testid="email-errors" />
             </div>
           )}
         </Field>

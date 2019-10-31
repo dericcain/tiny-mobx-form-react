@@ -3,7 +3,7 @@
 ⚛️ Tiny (<1KB) React bindings for [Tiny MobX Form](https://dericgw.github.io/tiny-mobx-form/)
 
 ## Features
-- 🚶 Small, less than 1KB and tree-shakable
+- 🚶 Small, less than 600B (but may grow to 1KB) and tree-shakable
 - 💪 Written in TypeScript using MobX
 - ⚠️ Includes popular validations
 - 📝 Can add your own custom validations if needed
