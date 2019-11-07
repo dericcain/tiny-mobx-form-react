@@ -20,6 +20,7 @@ export const Form: React.FC<FormProps> = ({
   options = {},
   submit,
   children,
+  ...props
 }) => {
   const form = new FormModel(fields, initialValues, options);
   const value = { form };
@@ -34,7 +35,9 @@ export const Form: React.FC<FormProps> = ({
   }
   return (
     <FormContext.Provider value={value}>
-      <form onSubmit={onSubmit}>{children}</form>
+      <form onSubmit={onSubmit} {...props}>
+        {children}
+      </form>
     </FormContext.Provider>
   );
 };
