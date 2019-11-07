@@ -26,7 +26,7 @@ export const Form: React.FC<FormProps> = ({
   const value = { form };
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.persist();
+    e.preventDefault();
     if (form.errors) {
       form.showErrors();
     } else {
