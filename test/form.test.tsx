@@ -7,14 +7,13 @@ import { IFormSchema } from 'tiny-mobx-form';
 
 describe('React Bindings', () => {
   const mockSubmit = jest.fn();
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) =>  {
-    e.preventDefault();
+  const onSubmit = () =>  {
     mockSubmit();
   };
   const renderForm = (
     fields: IFormSchema[],
     el: React.ReactNode | null = null,
-    submit: (e: React.FormEvent<HTMLFormElement>) => void = onSubmit,
+    submit: () => void = onSubmit,
   ) =>
     render(
       <Form fields={fields} submit={submit} data-testid="form">
