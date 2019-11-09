@@ -25,12 +25,12 @@ export const Form: React.FC<FormProps> = ({
   const form = new FormModel(fields, initialValues, options);
   const value = { form };
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (form.errors) {
-      form.showErrors();
+    if (form.isValid) {
+      submit(form.values, form.errors);
     } else {
-      await submit(form.values, form.errors);
+      form.showErrors();
     }
   }
   return (

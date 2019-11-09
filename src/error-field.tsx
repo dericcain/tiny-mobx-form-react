@@ -10,7 +10,7 @@ export function ErrorField({ name, ...props }: ErrorFieldProps) {
   const field = useField(name);
   return (
     <div {...props}>
-      {field.isDirty &&
+      {field.isTouched &&
         field.hasErrors &&
         field.errors.map((error: string) => <span key={error}>{error}</span>)}
     </div>
