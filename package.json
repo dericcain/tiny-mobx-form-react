@@ -51,6 +51,7 @@
     "tiny-mobx-form": ">=0.6"
   },
   "devDependencies": {
+    "@size-limit/preset-small-lib": "^2.1.6",
     "@testing-library/react": "^9.3.0",
     "@testing-library/jest-dom": "^4.1.2",
     "@testing-library/user-event": "^7.1.2",
